@@ -1,0 +1,2 @@
+C:\Users\allen\OneDrive\桌面\C++gameProgram\ForPractice\GP_C++\x64\Debug\GP_C++.exe
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++_PingPong\x64\Debug\GP_C++.exe
