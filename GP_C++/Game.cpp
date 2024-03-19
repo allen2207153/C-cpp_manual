@@ -1,6 +1,6 @@
 #include"Game.h"
 #include<iostream>
-
+#include<Windows.h>
 const int thickness = 15;
 const float paddleH = 100.0f;
 const int maxBallNum = 5;
@@ -40,17 +40,25 @@ bool Game::Initialize()
 		0
 	);
 
-	mRender = SDL_CreateRenderer(
-		mWindow,
-		-1,
-		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-	);
-
 	if (!mWindow)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		return false;
 	}
+
+	mRender = SDL_CreateRenderer(
+		mWindow,
+		-1,
+		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+	);
+	if (!mRender)
+	{
+		SDL_Log("Failed to create renderer: %s", SDL_GetError());
+		return false;
+	}
+
+	
+	
 	//paddle's position
 	for (int i = 0; i < 2; i++)
 	{
@@ -61,8 +69,10 @@ bool Game::Initialize()
 	mBall.emplace_back();
 	mBall[0].pos.x = 1024.0f / 2.0f;
 	mBall[0].pos.y = 768.0f / 2.0f;
-	mBall[0].vel.x = -2.0f;
-	mBall[0].vel.y = 2.0f;
+	mBall[0].vel.x = -1.0f;
+	mBall[0].vel.y = 1.0f;
+	mBallInitialPos = mBall[0].pos;
+	mBallInitialVel = mBall[0].vel;
 	NumBall = 1;
 	
 
@@ -224,52 +234,65 @@ void Game::UpdateGame()
 			}
 		}
 
-		////Out of screen
-		//if (b.pos.x < 0.0f)
-		//{
-		//	NumBall--;
-		//	if (mBall.size() > 0)
-		//	{
-		//		mBall.erase(mBall.begin() + count);
-		//	}
-		//}
-		//else if(b.pos.x >1024.0f)
-		//{
-		//	NumBall--;
-		//	if (mBall.size() > 0)
-		//	{
-		//		mBall.erase(mBall.begin() + count);
-		//	}
-		//}
+		//Out of screen and calculate score
+		if (b.pos.x < 0.0f)
+		{
+			Score[1]++;
+			std::cout << Score[0] << "VS" << Score[1] << std::endl;
+			NumBall--;
+			if (mBall.size() > 0)
+			{
+				mBall.erase(mBall.begin() + count);
+			}
+		}
+		else if(b.pos.x >1024.0f)
+		{
+			Score[0]++;
+			std::cout << Score[0] << "VS" << Score[1] << std::endl;
+			NumBall--;
+			if (mBall.size() > 0)
+			{
+				mBall.erase(mBall.begin() + count);
+			}
+		}
 
-		//if (NumBall <= 0)break;
-		//count++;
+		if (NumBall <= 0)break;
+		count++;
 
 		
 	}
 	//When the ball is zero,initialization ball
-	/*if (NumBall <= 0)
-	{
-		SDL_DestroyRenderer(mRender);
-
-	}*/
-
-	
-	// Did the ball collide with the right wall?
-	/*else if (mBallPos.x >= (1024.0f - thickness) && mBallVec.x > 0.0f)
-	{
-		mBallVec.x *= -1.0f;
-	}*/
-	//if ball go off the screen(if so than end)
-	
 	if (NumBall <= 0)
 	{
+		std::cout << std::endl << "Result  " << Score[0] << "VS" << Score[1] << std::endl;
+		if (Score[0] > Score[1])
+		{
+			std::cout << "Player1 Win    :      Player2 Lose" << std::endl;
+		}
+		else if (Score[0] < Score[1])
+		{
+			std::cout << "Player1 Lose     :      Player2 Win" << std::endl;
+		}
+		else {
+			std::cout << "Draw" << std::endl;
+		}
+		Sleep(2 * 1000);
 		SDL_DestroyRenderer(mRender);
 		mBall.emplace_back();
 		mBall[0].pos = mBallInitialPos;
 		mBall[0].vel = mBallInitialVel;
 		NumBall = 1;
+		for (int i = 0; i < 2; i++) Score[i] = 0;
+		mRender = SDL_CreateRenderer(
+			mWindow, // Window to create renderer for
+			-1,      // Usually -1
+			SDL_RENDERER_ACCELERATED 
+		);
+		GenerateOutput();
+	
 	}
+	
+
 }
 void Game::GenerateOutput()
 {

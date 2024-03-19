@@ -56,5 +56,6 @@ private:
 	Vector2 mBallInitialVel;
 	//Use vector to create mutiple ball
 	std::vector<Ball> mBall;
+	int Score[2];
 	int NumBall;
 };
