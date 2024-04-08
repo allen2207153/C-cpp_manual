@@ -4,21 +4,10 @@
 #include<vector>
 #include<random>
 
-
+using namespace std;
 class Game
 {
-	struct Vector2
-	{
-		float x;
-		float y;
-	};
 	
-	struct Ball
-	{
-		Vector2 pos;
-		Vector2 vel;
-	};
-
 public:
 	Game();
 	// Initialize the game
@@ -27,14 +16,21 @@ public:
 	void RunLoop();
 	// Shutdown the game
 	void Shutdown();
+
+	void AddActor(class Actor* actor);
+	void RemoveActor(class Actor* actor);
+
 private:
 	// Helper functions for the game loop
 	void ProcessInput();
 	void UpdateGame();
 	void GenerateOutput();
-	void GenerateBall(Ball b, Vector2 pos, Vector2 vel);
-	float GetRandom(float min, float max);
-
+	void LoadData();
+	void UnLoadData();
+	
+	vector<class Actor*> mActor;
+	vector<class Actor*> mPendingActors;
+	
 	// Window created by SDL
 	SDL_Window* mWindow;
 	//rendering 2D drawing
@@ -44,18 +40,6 @@ private:
 
 	// Game should continue to run
 	bool mIsRunning;
-	//Paddle's direction
-	int mPaddleDir[2];
-	//Paddle's position
-	Vector2 mPaddlePos[2];
-	//Ball's position
-	Vector2 mBallPos;
-	Vector2 mBallInitialPos;
-	//Ball's velocity
-	Vector2 mBallVec;
-	Vector2 mBallInitialVel;
-	//Use vector to create mutiple ball
-	std::vector<Ball> mBall;
-	int Score[2];
-	int NumBall;
+	//Update actor
+	bool mUpdatingActors;
 };

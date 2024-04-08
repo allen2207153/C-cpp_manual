@@ -18,12 +18,27 @@
     <ClInclude Include="Game.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
   </ItemGroup>
