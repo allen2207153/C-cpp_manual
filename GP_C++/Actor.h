@@ -11,7 +11,7 @@ public:
 		EPaused,
 		EDead
 	};
-
+	//constructor and destructor
 	Actor(class Game* game);
 	virtual ~Actor();
 
@@ -21,6 +21,15 @@ public:
 	void UpdateComponent(float deltaTime);
 	//Update actor
 	virtual void UpdateActor(float deltaTime);
+
+	//get and set
+	const Vector2& GetPosition() const { return mPosition; }
+	void SetPosition(const Vector2& pos) { mPosition = pos; }
+	float GetScale() const { return mScale; }
+	void SetScale(float scale) { mScale = scale; }
+	float GetRotation() const { return mRotation; }
+	void SetRotation(float rotation) { mRotation = rotation; }
+	
 	State GetState() const { return mState; }
 	void SetState(State state) { mState = state; }
 
@@ -31,8 +40,8 @@ public:
 
 private:
 	State mState;
-	Vector2 mPosition;
-	float mScale;
+	Vector2 mPosition;//actor's center
+	float mScale;//actor's scale
 	float mRotation;
 	vector<class Component*> mComponent;
 	class Game* mGame;

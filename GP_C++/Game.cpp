@@ -2,7 +2,11 @@
 #include<iostream>
 #include<Windows.h>
 #include"Actor.h"
+#include <algorithm>
+#include"SDL_image.h"
+#include"SpriteComponent.h"
 
+using namespace std;
 
 Game::Game()
 	:mWindow(nullptr)
@@ -89,7 +93,7 @@ void Game::ProcessInput()
 
 void Game::UpdateGame()
 {
-	float deltaTime = 0;
+	float deltaTime = (SDL_GetTicks() - mTickCount) / 1000.0f;
 	mUpdatingActors = true;
 
 	//Update all actor
@@ -142,6 +146,7 @@ void Game::GenerateOutput()
 
 void Game::AddActor(Actor* actor)
 {
+	//pending actor after updating
 	if (mUpdatingActors)
 	{
 		mPendingActors.emplace_back(actor);
@@ -154,7 +159,22 @@ void Game::AddActor(Actor* actor)
 
 void Game::RemoveActor(Actor* actor)
 {
-		
+	auto iter = std::find(mPendingActors.begin(), mPendingActors.end(), actor);
+	if (iter != mPendingActors.end())
+	{
+		// Swap to end of vector and pop off (avoid erase copies)
+		std::iter_swap(iter, mPendingActors.end() - 1);
+		mPendingActors.pop_back();
+	}
+
+	// Is it in actors?
+	iter = find(mActor.begin(), mActor.end(), actor);
+	if (iter != mActor.end())
+	{
+		// Swap to end of vector and pop off (avoid erase copies)
+		std::iter_swap(iter, mActor.end() - 1);
+		mActor.pop_back();
+	}
 }
 
 void Game::Shutdown()
@@ -162,6 +182,62 @@ void Game::Shutdown()
 	SDL_DestroyWindow(mWindow);
 	SDL_DestroyRenderer(mRender);
 	SDL_Quit();
+}
+
+void Game::UnLoadData()
+{
+	while (!mActor.empty())
+	{
+		delete mActor.back();
+	}
+}
+
+void Game::AddSprite(SpriteComponent* sprite)
+{
+	// Find the insertion point in the sorted vector
+	// first element with a higher draw order
+	int myDrawOrder = sprite->GetDrawOrder();
+	auto iter = mSprites.begin();
+	for (; iter != mSprites.end(); ++iter)
+	{
+		if (myDrawOrder < (*iter)->GetDrawOrder());
+		{
+			break;
+		}
+	}
+
+	//Insert point before position iterator
+	mSprites.insert(iter, sprite);
+}
+
+SDL_Texture* Game::GetTexture(const char* fileName)
+{
+	//Load from file
+	SDL_Surface* surf = IMG_Load(fileName);
+	if (!surf)
+	{
+		//Error message when failed to load texture file
+		SDL_Log("Failed to load texture file %s", fileName);
+		return nullptr;
+	}
+
+	//Create texture from surface
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(mRender, surf);
+	SDL_FreeSurface(surf);
+	if (!tex)
+	{
+		SDL_Log("Failed to load texture file %s", fileName);
+		return nullptr;
+	}
+	return tex;
+}
+
+void SpriteComponent::SetTexture(SDL_Texture* texture)
+{
+	mTexture = texture;
+	//Get texture's wdith and height
+	SDL_QueryTexture(texture, nullptr, nullptr,
+		&mTexWidth, &mTexHeight);
 }
 
 

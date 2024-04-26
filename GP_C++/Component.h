@@ -8,13 +8,15 @@ public:
 	Component(class Actor* owner, int updateOrder = 100);
 	//Destructor
 	virtual ~Component();
-	//Update component
+	//Update component with deltatime
 	virtual void Update(float deltatime);
 	
 	int GetUpdateOrder() const { return mUpdateOrder; }
 
 
 protected:
+	//all actor
 	class Actor* mOwner;
+	//Component update order
 	int mUpdateOrder;
 };

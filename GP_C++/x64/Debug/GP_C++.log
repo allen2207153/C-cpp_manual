@@ -1,4 +1,17 @@
 ﻿  Actor.cpp
   Game.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(825,36): error C2059: 語法錯誤: ')'
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(825,1): error C2143: 語法錯誤: 遺漏 ';' (在 '}' 之前)
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(825,45): error C2059: 語法錯誤: ','
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(826,1): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(826,1): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(827,3): error C2059: 語法錯誤: '}'
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(827,1): error C2143: 語法錯誤: 遺漏 ';' (在 '}' 之前)
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(828,3): error C2059: 語法錯誤: 'return'
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(829,2): error C2059: 語法錯誤: '}'
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(829,1): error C2143: 語法錯誤: 遺漏 ';' (在 '}' 之前)
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(832): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(832): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
+  main.cpp
+  Math.cpp
   正在產生程式碼...
-  GP_C++.vcxproj -> C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\x64\Debug\GP_C++.exe
