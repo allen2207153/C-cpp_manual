@@ -9,7 +9,7 @@ class BGSpriteComponent : public SpriteComponent
 {
 public:
 	//Set draw order to default to lower
-	BGSpriteComponent(class Actor owner, int drawOrder = 10);
+	BGSpriteComponent(class Actor* owner, int drawOrder = 10);
 	void Update(float deltaTime) override;
 	void Draw(SDL_Renderer* renderer) override;
 	void SetBGTextures(const vector<SDL_Texture*>& textures);
@@ -21,9 +21,8 @@ private:
 	{
 		SDL_Texture* mTexture;
 		Vector2 mOffset;
-		float mScrollSpeed;
 	};
-	vector<BGTexture> mBGtextures;
+	vector<BGTexture> mBGTextures;
 	Vector2 mScreenSize;
 	float mScrollSpeed;
 };

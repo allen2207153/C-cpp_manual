@@ -5,6 +5,8 @@
 #include <algorithm>
 #include"SDL_image.h"
 #include"SpriteComponent.h"
+#include"BGSpriteComponent.h"
+#include"Ship.h"
 
 using namespace std;
 
@@ -53,6 +55,10 @@ bool Game::Initialize()
 		return false;
 	}
 
+	LoadData();
+
+	mTickCount = SDL_GetTicks();
+
 	return true;
 }
 
@@ -93,10 +99,19 @@ void Game::ProcessInput()
 
 void Game::UpdateGame()
 {
+	//Compute delta time
+	//Wait until 16ms has elapsed since last frame
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTickCount + 16));
+
 	float deltaTime = (SDL_GetTicks() - mTickCount) / 1000.0f;
-	mUpdatingActors = true;
+	if (deltaTime > 0.05)
+	{
+		deltaTime = 0.05f;
+	}
+	mTickCount = SDL_GetTicks();
 
 	//Update all actor
+	mUpdatingActors = true;
 	for (auto actor : mActor)
 	{
 		actor->Update(deltaTime);
@@ -110,6 +125,7 @@ void Game::UpdateGame()
 	}
 	mPendingActors.clear();
 
+	//Add any dead actors to a temp vector
 	vector<Actor*> deadActors;
 
 	for (auto actor : mActor)
@@ -119,7 +135,7 @@ void Game::UpdateGame()
 			deadActors.emplace_back(actor);
 		}
 	}
-
+	//Delete dead actors(which remove them from mActors)
 	for (auto actor : deadActors)
 	{
 		delete actor;
@@ -137,11 +153,13 @@ void Game::GenerateOutput()
 	 //clear render
 	SDL_RenderClear(mRender);
 
-
-	//Set wall color
-	SDL_SetRenderDrawColor(mRender, 255, 255, 255, 255);
-
+	//Draw all sprite components
+	for (auto sprite : mSprites)
+	{
+		sprite->Draw(mRender);
+	}
 	
+	SDL_RenderPresent(mRender);
 }
 
 void Game::AddActor(Actor* actor)
@@ -159,7 +177,7 @@ void Game::AddActor(Actor* actor)
 
 void Game::RemoveActor(Actor* actor)
 {
-	auto iter = std::find(mPendingActors.begin(), mPendingActors.end(), actor);
+	auto iter = find(mPendingActors.begin(), mPendingActors.end(), actor);
 	if (iter != mPendingActors.end())
 	{
 		// Swap to end of vector and pop off (avoid erase copies)
@@ -182,14 +200,56 @@ void Game::Shutdown()
 	SDL_DestroyWindow(mWindow);
 	SDL_DestroyRenderer(mRender);
 	SDL_Quit();
+	UnloadData();
+	IMG_Quit();
 }
 
-void Game::UnLoadData()
+void Game::LoadData()
 {
+	// Create player's ship
+	mShip = new Ship(this);
+	mShip->SetPosition(Vector2(100.0f, 384.0f));
+	mShip->SetScale(1.5f);
+
+	// Create actor for the background (this doesn't need a subclass)
+	Actor* temp = new Actor(this);
+	temp->SetPosition(Vector2(512.0f, 384.0f));
+	// Create the "far back" background
+	BGSpriteComponent* bg = new BGSpriteComponent(temp);
+	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	vector<SDL_Texture*> bgtexs = {
+		GetTexture("Assets/Farback01.png"),
+		GetTexture("Assets/Farback02.png")
+	};
+	bg->SetBGTextures(bgtexs);
+	bg->SetScrollSpeed(-100.0f);
+	// Create the closer background
+	bg = new BGSpriteComponent(temp, 50);
+	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	bgtexs = {
+		GetTexture("Assets/Stars.png"),
+		GetTexture("Assets/Stars.png")
+	};
+	bg->SetBGTextures(bgtexs);
+	bg->SetScrollSpeed(-200.0f);
+}
+
+
+void Game::UnloadData()
+{
+	//Delete actors
+	//~Actor(destructor) calls RemoveActor, have to use a different style loop
 	while (!mActor.empty())
 	{
 		delete mActor.back();
 	}
+
+	//Destroy textures
+	for (auto i : mTextures)
+	{
+		SDL_DestroyTexture(i.second);
+	}
+	mTextures.clear();
 }
 
 void Game::AddSprite(SpriteComponent* sprite)
@@ -200,7 +260,7 @@ void Game::AddSprite(SpriteComponent* sprite)
 	auto iter = mSprites.begin();
 	for (; iter != mSprites.end(); ++iter)
 	{
-		if (myDrawOrder < (*iter)->GetDrawOrder());
+		if (myDrawOrder < (*iter)->GetDrawOrder())
 		{
 			break;
 		}
@@ -210,34 +270,43 @@ void Game::AddSprite(SpriteComponent* sprite)
 	mSprites.insert(iter, sprite);
 }
 
-SDL_Texture* Game::GetTexture(const char* fileName)
+SDL_Texture* Game::GetTexture(const string& fileName)
 {
-	//Load from file
-	SDL_Surface* surf = IMG_Load(fileName);
-	if (!surf)
+	SDL_Texture* tex = nullptr;
+	// Is the texture already in the map?
+	auto iter = mTextures.find(fileName);
+	if (iter != mTextures.end())
 	{
-		//Error message when failed to load texture file
-		SDL_Log("Failed to load texture file %s", fileName);
-		return nullptr;
+		tex = iter->second;
 	}
-
-	//Create texture from surface
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(mRender, surf);
-	SDL_FreeSurface(surf);
-	if (!tex)
+	else
 	{
-		SDL_Log("Failed to load texture file %s", fileName);
-		return nullptr;
+		// Load from file
+		SDL_Surface* surf = IMG_Load(fileName.c_str());
+		if (!surf)
+		{
+			SDL_Log("Failed to load texture file %s", fileName.c_str());
+			return nullptr;
+		}
+
+		// Create texture from surface
+		tex = SDL_CreateTextureFromSurface(mRender, surf);
+		SDL_FreeSurface(surf);
+		if (!tex)
+		{
+			SDL_Log("Failed to convert surface to texture for %s", fileName.c_str());
+			return nullptr;
+		}
+
+		mTextures.emplace(fileName.c_str(), tex);
 	}
 	return tex;
 }
 
-void SpriteComponent::SetTexture(SDL_Texture* texture)
+void Game::RemoveSprite(class SpriteComponent* sprite)
 {
-	mTexture = texture;
-	//Get texture's wdith and height
-	SDL_QueryTexture(texture, nullptr, nullptr,
-		&mTexWidth, &mTexHeight);
+	auto iter = find(mSprites.begin(), mSprites.end(), sprite);
+	mSprites.erase(iter);
 }
 
 

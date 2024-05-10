@@ -1,20 +1,17 @@
 #pragma once
-
 #include "SDL.h"
-#include<vector>
-#include<random>
+#include <unordered_map>
+#include <string>
+#include <vector>
 
 using namespace std;
+
 class Game
 {
-	
 public:
 	Game();
-	// Initialize the game
 	bool Initialize();
-	// Runs the game loop until the game is over
 	void RunLoop();
-	// Shutdown the game
 	void Shutdown();
 
 	void AddActor(class Actor* actor);
@@ -23,31 +20,31 @@ public:
 	void AddSprite(class SpriteComponent* sprite);
 	void RemoveSprite(class SpriteComponent* sprite);
 
-	SDL_Texture* GetTexture(const char* fileName);
+	SDL_Texture* GetTexture(const string& fileName);
 private:
-	// Helper functions for the game loop
 	void ProcessInput();
 	void UpdateGame();
 	void GenerateOutput();
 	void LoadData();
-	void UnLoadData();
-	
-	//All the actor in game
-	vector<class Actor*> mActor;
-	//Any pending actor
-	vector<class Actor*> mPendingActors;
-	//All the sprite components drawn
-	vector<class SpriteComponent*> mSprites;
-	
-	// Window created by SDL
-	SDL_Window* mWindow;
-	//rendering 2D drawing
-	SDL_Renderer* mRender;
-	//Number of ticks since start game
-	Uint32 mTickCount;
+	void UnloadData();
 
-	// Game should continue to run
+	// Map of textures loaded
+	unordered_map<string, SDL_Texture*> mTextures;
+
+	// All the actors in the game
+	vector<class Actor*> mActor;
+	// Any pending actors
+	vector<class Actor*> mPendingActors;
+
+	// All the sprite components drawn
+	vector<class SpriteComponent*> mSprites;
+
+	SDL_Window* mWindow;
+	SDL_Renderer* mRender;
+	Uint32 mTickCount;
 	bool mIsRunning;
-	//Update actor
+	// Track if we're updating actors right now
 	bool mUpdatingActors;
+
+	class Ship* mShip; // Player's ship
 };

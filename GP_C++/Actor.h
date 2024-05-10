@@ -33,15 +33,18 @@ public:
 	State GetState() const { return mState; }
 	void SetState(State state) { mState = state; }
 
+	class Game* GetGame() { return mGame; }
 
-
-	void AddComponent(class Componenet* component);
+	// Add/remove components
+	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
-
 private:
+	// Actor's state
 	State mState;
-	Vector2 mPosition;//actor's center
-	float mScale;//actor's scale
+
+	// Transform
+	Vector2 mPosition;
+	float mScale;
 	float mRotation;
 	vector<class Component*> mComponent;
 	class Game* mGame;
