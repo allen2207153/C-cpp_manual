@@ -22,7 +22,7 @@ void SpriteComponent::Draw(SDL_Renderer* renderer)
 	if (mTexture)
 	{
 		SDL_Rect r;
-		//Scale the width and heightby owner's scale
+		//Scale the width and height by owner's scale
 		r.w = static_cast<int>(mTexWidth * mOwner->GetScale());
 		r.h = static_cast<int>(mTexHeight * mOwner->GetScale());
 		//Center the rectangle around the position of the owner
@@ -46,5 +46,5 @@ void SpriteComponent::SetTexture(SDL_Texture* texture)
 {
 	mTexture = texture;
 	//Get texture's height and width
-	SDL_QueryTexture(texture, nullptr, nullptr, &mTexHeight, &mTexHeight);
+	SDL_QueryTexture(texture, nullptr, nullptr, &mTexWidth, &mTexHeight);
 }

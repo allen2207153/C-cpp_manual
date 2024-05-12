@@ -1,27 +1,12 @@
 #include"BGSpriteComponent.h"
 #include"Actor.h"
-
+// This file has some problem
 using namespace std;
 
 BGSpriteComponent::BGSpriteComponent(class Actor* owner, int drawOrder)
 	:SpriteComponent(owner, drawOrder)
 	, mScrollSpeed(0.0f)
 {
-}
-
-void BGSpriteComponent::SetBGTextures(const vector<SDL_Texture*>& textures)
-{
-	int count = 0;
-	for (auto tex : textures)
-	{
-		BGTexture temp;
-		temp.mTexture = tex;
-		//Each texture is screen width in offset
-		temp.mOffset.x = count * mScreenSize.x;
-		temp.mOffset.y = 0;
-		mBGTextures.emplace_back(temp);
-		count++;
-	}
 }
 
 void BGSpriteComponent::Update(float deltaTime)
@@ -33,9 +18,9 @@ void BGSpriteComponent::Update(float deltaTime)
 		bg.mOffset.x += mScrollSpeed * deltaTime;
 		//If this is completely off the screen, reset offset to
 		//the right of the last bg texture
-		if (bg.mOffset.x< -mScreenSize.x)
+		if (bg.mOffset.x < -mScreenSize.x)
 		{
-			bg.mOffset.x = (mBGTextures.size() - 1 * mScreenSize.x - 1);
+			bg.mOffset.x = (mBGTextures.size() - 1) * mScreenSize.x - 1;
 		}
 	}
 }
@@ -61,3 +46,21 @@ void BGSpriteComponent::Draw(SDL_Renderer* renderer)
 		);
 	}
 }
+
+void BGSpriteComponent::SetBGTextures(const vector<SDL_Texture*>& textures)
+{
+	int count = 0;
+	for (auto tex : textures)
+	{
+		BGTexture temp;
+		temp.mTexture = tex;
+		//Each texture is screen width in offset
+		temp.mOffset.x = count * mScreenSize.x;
+		temp.mOffset.y = 0;
+		mBGTextures.emplace_back(temp);
+		count++;
+	}
+}
+
+
+

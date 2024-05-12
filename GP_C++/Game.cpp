@@ -13,8 +13,9 @@ using namespace std;
 Game::Game()
 	:mWindow(nullptr)
 	,mRender(nullptr)
-	,mTickCount(0)
 	, mIsRunning(true)
+	,mUpdatingActors(false)
+	
 {
 	
 }
@@ -94,6 +95,7 @@ void Game::ProcessInput()
 		mIsRunning = false;
 	}
 
+	mShip->ProcessKeyBoard(state);
 	
 }
 
@@ -104,7 +106,7 @@ void Game::UpdateGame()
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTickCount + 16));
 
 	float deltaTime = (SDL_GetTicks() - mTickCount) / 1000.0f;
-	if (deltaTime > 0.05)
+	if (deltaTime > 0.05f)
 	{
 		deltaTime = 0.05f;
 	}
@@ -147,7 +149,7 @@ void Game::GenerateOutput()
 		mRender,
 		0,		//R
 		0,		//G
-		255,	//B
+		0,	//B
 		255	//A
 	);
 	 //clear render
@@ -181,7 +183,7 @@ void Game::RemoveActor(Actor* actor)
 	if (iter != mPendingActors.end())
 	{
 		// Swap to end of vector and pop off (avoid erase copies)
-		std::iter_swap(iter, mPendingActors.end() - 1);
+		iter_swap(iter, mPendingActors.end() - 1);
 		mPendingActors.pop_back();
 	}
 
@@ -190,7 +192,7 @@ void Game::RemoveActor(Actor* actor)
 	if (iter != mActor.end())
 	{
 		// Swap to end of vector and pop off (avoid erase copies)
-		std::iter_swap(iter, mActor.end() - 1);
+		iter_swap(iter, mActor.end() - 1);
 		mActor.pop_back();
 	}
 }
