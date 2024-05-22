@@ -18,5 +18,6 @@ protected:
 	//all actor
 	class Actor* mOwner;
 	//Component update order
+	class Actor* mActor;
 	int mUpdateOrder;
 };

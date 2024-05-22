@@ -7,6 +7,7 @@
 #include"SpriteComponent.h"
 #include"BGSpriteComponent.h"
 #include"Ship.h"
+#include"TitleScene.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ bool Game::Initialize()
 	}
 
 	mWindow = SDL_CreateWindow(
-		"Game Programming in C++(Chapter1)",
+		"Shooting game",
 		100,
 		100,
 		1024,
@@ -56,9 +57,12 @@ bool Game::Initialize()
 		return false;
 	}
 
+
 	LoadData();
 
 	mTickCount = SDL_GetTicks();
+
+	
 
 	return true;
 }
@@ -67,11 +71,22 @@ bool Game::Initialize()
 
 void Game::RunLoop()
 {
+	mScene = new TitleScene(this);
+	mNextScene = mScene;
+	StartScene();
+	
 	while (mIsRunning)
 	{
-		ProcessInput();
-		UpdateGame();
-		GenerateOutput();
+		//Update scene
+		UpdateScene();
+		//Start scene
+		if (mScene->GetSceneName().compare(mNextScene->GetSceneName()) != 0)
+		{
+			delete mScene;
+			mScene = mNextScene;
+			StartScene();
+		}
+
 	}
 }
 void Game::ProcessInput()
@@ -95,12 +110,14 @@ void Game::ProcessInput()
 		mIsRunning = false;
 	}
 
-	mShip->ProcessKeyBoard(state);
+	mScene->ProcessInput(state);
 	
 }
 
-void Game::UpdateGame()
+void Game::UpdateScene()
 {
+	ProcessInput();
+
 	//Compute delta time
 	//Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTickCount + 16));
@@ -127,6 +144,9 @@ void Game::UpdateGame()
 	}
 	mPendingActors.clear();
 
+	//Update scene
+	mScene->Update(deltaTime);
+
 	//Add any dead actors to a temp vector
 	vector<Actor*> deadActors;
 
@@ -142,6 +162,9 @@ void Game::UpdateGame()
 	{
 		delete actor;
 	}
+
+	//Output
+	GenerateOutput();
 }
 void Game::GenerateOutput()
 {
@@ -208,10 +231,10 @@ void Game::Shutdown()
 
 void Game::LoadData()
 {
-	// Create player's ship
-	mShip = new Ship(this);
-	mShip->SetPosition(Vector2(100.0f, 384.0f));
-	mShip->SetScale(1.5f);
+	//// Create player's ship
+	//mShip = new Ship(this);
+	//mShip->SetPosition(Vector2(100.0f, 384.0f));
+	//mShip->SetScale(1.5f);
 
 	// Create actor for the background (this doesn't need a subclass)
 	Actor* temp = new Actor(this);
@@ -311,6 +334,10 @@ void Game::RemoveSprite(class SpriteComponent* sprite)
 	mSprites.erase(iter);
 }
 
+void Game::StartScene()
+{
+	mScene->Start();
+}
 
 
 

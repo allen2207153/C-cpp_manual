@@ -39,6 +39,30 @@
     <ClInclude Include="Ship.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScene.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Missile.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,6 +90,27 @@
       <Filter>資源檔</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScene.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Missile.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
   </ItemGroup>
