@@ -17,6 +17,9 @@ public:
 	void AddActor(class Actor* actor);
 	void RemoveActor(class Actor* actor);
 
+	void AddEnemy(class Enemy* enemy);
+	void RemoveEnemy(class Enemy* enemy);
+
 	void AddSprite(class SpriteComponent* sprite);
 	void RemoveSprite(class SpriteComponent* sprite);
 
@@ -55,6 +58,7 @@ private:
 	class Scene* mNextScene;//Next scene
 
 	class Ship* mShip; // Player's ship
+	vector<class Enemy*> mEnemies;
 
 public:
 	//getter, setter
@@ -63,6 +67,7 @@ public:
 	Scene* GetScene() const { return mScene; }
 	void SetScene(class Scene* scene) { mScene = scene; }
 	vector<class Actor*> GetActors() { return mActor; }
+	vector<class Enemy*> GetEnemies() { return mEnemies; }
 	void SetGameClear(const bool isClear) { mGameClear = isClear; }
 	bool GetGameClear() const { return mGameClear; }
 	void SetShip(class Ship* ship) { mShip = ship; }

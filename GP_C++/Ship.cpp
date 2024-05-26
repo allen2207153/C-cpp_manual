@@ -1,11 +1,20 @@
 #include "Ship.h"
 #include "AnimSpriteComponent.h"
+#include "ColliderComponent.h"
+#include "Missile.h"
 #include "Game.h"
+#include"Scene.h"
+#include"EndScene.h"
+#include"Enemy.h"
+#include "Math.h"
+#include"BombEffect.h"
 
 Ship::Ship(Game* game)
 	:Actor(game)
 	, mRightSpeed(0.0f)
 	, mDownSpeed(0.0f)
+	,mCanShot(false)
+	,mDeltaShotTime(0.0f)
 {
 	// Create an animated sprite component
 	AnimSpriteComponent* asc = new AnimSpriteComponent(this);
@@ -16,33 +25,64 @@ Ship::Ship(Game* game)
 		game->GetTexture("Assets/Ship04.png"),
 	};
 	asc->SetAnimTextures(anims);
+	mCollider = new ColliderComponent(this);
+	mCollider->SetRadius(70.0f * GetScale());
 }
 
 void Ship::UpdateActor(float deltaTime)
 {
 	Actor::UpdateActor(deltaTime);
 	// Update position based on speeds and delta time
-	Vector2 pos = GetPosition();
-	pos.x += mRightSpeed * deltaTime;
-	pos.y += mDownSpeed * deltaTime;
-	// Restrict position to left half of screen
-	if (pos.x < 25.0f)
+	
+	if (GetGame()->GetScene()->GetSceneName().compare("END") != 0)
 	{
-		pos.x = 25.0f;
+		Vector2 pos = GetPosition();
+		pos.x += mRightSpeed * deltaTime;
+		pos.y += mDownSpeed * deltaTime;
+		// Restrict position to left half of screen
+		if (pos.x < 25.0f)
+		{
+			pos.x = 25.0f;
+		}
+		else if (pos.x > 990.0f)
+		{
+			pos.x = 990.0f;
+		}
+		if (pos.y < 25.0f)
+		{
+			pos.y = 25.0f;
+		}
+		else if (pos.y > 743.0f)
+		{
+			pos.y = 743.0f;
+		}
+		SetPosition(pos);
 	}
-	else if (pos.x > 500.0f)
+
+	if (!mCanShot)
 	{
-		pos.x = 500.0f;
+		mDeltaShotTime += deltaTime;
+		if (mDeltaShotTime > CanShotTime)
+		{
+			mCanShot = true;
+			mDeltaShotTime = 0.0f;
+		}
 	}
-	if (pos.y < 25.0f)
+
+	//Collision with enimies
+	for (auto enemy : GetGame()->GetEnemies())
 	{
-		pos.y = 25.0f;
+		if (Intersect(*mCollider, *(enemy->GetCollider())))
+		{
+			GetGame()->SetNextScene(new EndScene(GetGame()));
+			SetState(EDead);
+
+			auto* bomb = new BombEffect(GetGame());
+			bomb->SetPosition(Vector2(enemy->GetPosition()));
+			return;
+		}
 	}
-	else if (pos.y > 743.0f)
-	{
-		pos.y = 743.0f;
-	}
-	SetPosition(pos);
+
 }
 
 void Ship::ProcessKeyBoard(const uint8_t* state)
@@ -66,5 +106,18 @@ void Ship::ProcessKeyBoard(const uint8_t* state)
 	if (state[SDL_SCANCODE_W])
 	{
 		mDownSpeed -= 300.0f;
+	}
+
+	if (state[SDL_SCANCODE_K])
+	{
+		if (mCanShot)
+		{
+			mCanShot = false;
+			mDeltaShotTime = 0.0f;
+
+			auto* missile = new Missile(GetGame());
+			Vector2 pos = GetPosition();
+			missile->SetPosition(Vector2(pos.x +20.0f, pos.y ));
+		}
 	}
 }

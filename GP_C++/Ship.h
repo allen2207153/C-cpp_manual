@@ -12,5 +12,11 @@ public:
 private:
 	float mRightSpeed;
 	float mDownSpeed;
+	
+	bool mCanShot;
+	float mDeltaShotTime;
+	const float CanShotTime = 0.15f;
+
+	class ColliderComponent* mCollider;
 };
 

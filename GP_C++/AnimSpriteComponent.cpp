@@ -9,6 +9,7 @@
 #include "AnimSpriteComponent.h"
 #include "Math.h"
 
+
 using namespace std;
 
 AnimSpriteComponent::AnimSpriteComponent(Actor* owner, int drawOrder)
@@ -47,5 +48,6 @@ void AnimSpriteComponent::SetAnimTextures(const vector<SDL_Texture*>& textures)
 		// Set the active texture to first frame
 		mCurrFrame = 0.0f;
 		SetTexture(mAnimTextures[0]);
+		
 	}
 }

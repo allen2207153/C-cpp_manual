@@ -60,7 +60,7 @@
     <ClInclude Include="ColliderComponent.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2.h">
+    <ClInclude Include="BombEffect.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,13 +104,16 @@
     <ClCompile Include="EndScene.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
     <ClCompile Include="ColliderComponent.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
     <ClCompile Include="Missile.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="BombEffect.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,13 +11,15 @@ public:
 	//Update component with deltatime
 	virtual void Update(float deltatime);
 	
-	int GetUpdateOrder() const { return mUpdateOrder; }
-
-
 protected:
 	//all actor
 	class Actor* mOwner;
 	//Component update order
-	class Actor* mActor;
 	int mUpdateOrder;
+
+public:
+	int GetUpdateOrder() const { return mUpdateOrder; }
+
+
+
 };

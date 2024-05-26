@@ -11,6 +11,7 @@
 #include <cmath>
 #include <memory.h>
 #include <limits>
+#include<random>
 
 namespace Math
 {
@@ -40,6 +41,15 @@ namespace Math
 		{
 			return false;
 		}
+	}
+
+	//random
+	static std::random_device seed_gen;
+	static std::default_random_engine randomEngine(seed_gen());
+	inline float GetRand(float min, float max)
+	{
+		std::uniform_real_distribution<> dist(min, max);
+		return dist(Math::randomEngine);
 	}
 
 	template <typename T>

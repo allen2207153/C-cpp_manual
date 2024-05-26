@@ -4,7 +4,7 @@
 #include"SpriteComponent.h"
 #include"ColliderComponent.h"
 #include "AnimSpriteComponent.h"
-
+#include"BombEffect.h"
 
 Missile::Missile(class Game* game)
 	:Actor(game)
@@ -27,13 +27,30 @@ void Missile::UpdateActor(float deltaTime)
 	Actor::UpdateActor(deltaTime);
 	//Missile's transform
 	Vector2 pos = GetPosition();
-	pos.y -= mMissileSpeed * deltaTime;
+	pos.x += mMissileSpeed * deltaTime;
 
-	if (pos.y <= 50.0f)
+	if (pos.x >= 990.0f)
 	{
 		SetState(EDead);
 	}
 	SetPosition(pos);
 
+
+	//Collision with enemy
+	for (auto enemy : GetGame()->GetEnemies())
+	{
+		if (Intersect(*mCollider, *(enemy->GetCollider())))
+		{
+			SetState(EDead);
+			enemy->SetState(EDead);
+
+			//BombEffect
+			auto* bomb = new BombEffect(GetGame());
+			bomb->SetPosition(Vector2(enemy->GetPosition()));
+		}
+		
+	}
+
+	
 
 }

@@ -22,12 +22,12 @@ void TitleScene::Start()
 	//Initialization
 	mGame->SetGameClear(false);
 	mStartMsg = new Actor(mGame);
-	mStartMsg->SetPosition(Vector2(mGame->ScreenHeight / 2-300, mGame->ScreenWidth / 2));
+	mStartMsg->SetPosition(Vector2(mGame->ScreenHeight / 2, mGame->ScreenWidth / 2+200));
 	auto* startMsgSprite = new SpriteComponent(mStartMsg, 200);
-	startMsgSprite->SetTexture(mGame->GetTexture("Assets/Ship01.png"));
+	startMsgSprite->SetTexture(mGame->GetTexture("Assets/msg_start.png"));
 	//Draw ship
 	Ship* ship = new Ship(mGame);
-	ship->SetPosition(Vector2(mGame->ScreenHeight / 2-300, mGame->ScreenWidth / 2 ));
+	ship->SetPosition(Vector2(mGame->ScreenHeight / 2-500, mGame->ScreenWidth / 2 ));
 	mGame->SetShip(ship);
 }
 

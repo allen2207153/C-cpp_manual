@@ -10,12 +10,12 @@ ColliderComponent::ColliderComponent(class Actor* actor)
 
 const Vector2& ColliderComponent::GetCenter() const
 {
-	return mActor->GetPosition();
+	return mOwner->GetPosition();
 }
 
 float ColliderComponent::GetRadius() const
 {
-	return mActor->GetScale() * mRadius;
+	return mOwner->GetScale() * mRadius;
 }
 
 bool Intersect(const ColliderComponent& a, const ColliderComponent& b)

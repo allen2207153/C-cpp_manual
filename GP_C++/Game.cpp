@@ -8,6 +8,7 @@
 #include"BGSpriteComponent.h"
 #include"Ship.h"
 #include"TitleScene.h"
+#include"Enemy.h"
 
 using namespace std;
 
@@ -339,5 +340,17 @@ void Game::StartScene()
 	mScene->Start();
 }
 
+void Game::AddEnemy(Enemy* enemy)
+{
+	mEnemies.emplace_back(enemy);
+}
 
+void Game::RemoveEnemy(Enemy* enemy)
+{
+	auto iter = find(mEnemies.begin(), mEnemies.end(), enemy);
+	if (iter != mEnemies.end())
+	{
+		mEnemies.erase(iter);
+	}
+}
 

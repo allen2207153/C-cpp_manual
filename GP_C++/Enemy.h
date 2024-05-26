@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+#include"Math.h"
 // エネミークラス
 class Enemy : public Actor {
 public:
@@ -18,7 +19,7 @@ public:
 private:
     MoveType mEnemyMoveType; // 移動タイプ
     float mEnemySpeed;       // 移動速度
-    float mEnemyShakeWidth;  // 揺れる幅
+    float mEnemyShakeHeight;  // 揺れる幅
     Vector2* mInitPosition;  // 最初の位置
     float mTimeCount; // 経過時間
     float mWaitTime;  // 待機時間
@@ -28,7 +29,7 @@ public:
     // Getter, Setter
     void SetEnemyMoveType(const MoveType moveType) { mEnemyMoveType = moveType; }
     void SetEnemySpeed(const float speed) { mEnemySpeed = speed; }
-    void SetEnemyShakeWidth(const float width) { mEnemyShakeWidth = width; }
+    void SetEnemyShakeHeight(const float height) { mEnemyShakeHeight = height; }
     void SetWaitTime(const float time) { mWaitTime = time; }
     class ColliderComponent* GetCollider() const { return mCollider; }
 };
