@@ -38,7 +38,7 @@ void TitleScene::Update(float deltaTime)
 
 void TitleScene::ProcessInput(const Uint8* state)
 {
-	if (state[SDL_SCANCODE_SPACE] || state[SDL_SCANCODE_RETURN])
+	if (state[SDL_SCANCODE_SPACE] || state[SDL_SCANCODE_S])
 	{
 		mGame->SetNextScene(new GameScene(mGame));
 		mStartMsg->SetState(Actor::EDead);

@@ -52,11 +52,11 @@ void Enemy::UpdateActor(float deltaTime)
 	default:
 		break;
 	}
-
+	//Out of screen
 	if (pos. x<=0)
 	{
 		SetState(EDead);
-		//GetGame()->SetNextScene(new EndScene(GetGame()));
+		GetGame()->SetNextScene(new EndScene(GetGame()));
 	}
 	SetPosition(pos);
 }

@@ -18,7 +18,7 @@ GameScene::~GameScene()
 
 void GameScene::Start()
 {
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		auto* enemy = new Enemy(mGame);
 		enemy->SetPosition(Vector2(1100.0f, Math::GetRand(100.0f, mGame->ScreenHeight - 100)));
@@ -47,11 +47,7 @@ void GameScene::ProcessInput(const Uint8* state)
 {
 	mGame->GetShip()->ProcessKeyBoard(state);
 
-	if (state[SDL_SCANCODE_SPACE] || state[SDL_SCANCODE_RETURN])
-	{
-		mGame->SetGameClear(true);
-		mGame->SetNextScene(new GameScene(mGame));
-	}
+
 }
 
 string const GameScene::GetSceneName()

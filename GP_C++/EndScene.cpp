@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Actor.h"
 #include "Ship.h"
+#include"Enemy.h"
 #include "SpriteComponent.h"
 
 EndScene::EndScene(class Game* game)
@@ -24,7 +25,7 @@ void EndScene::Start()
 
 	
 	endMsgSprite->SetTexture(
-		mGame->GetTexture("Assets/msg_over.png")
+		mGame->GetTexture((mGame->GetGameClear() ? "Assets/msg_clear.png" : "Assets/msg_over.png"))
 	);
 
 }
@@ -48,6 +49,10 @@ void EndScene::ProcessInput(const Uint8* state)
 		if (iter != actors.end())
 		{
 			ship->SetState(Actor::EDead);
+		}
+		for (auto enemy : mGame->GetEnemies())
+		{
+			enemy->SetState(Actor::EDead);
 		}
 	}
 }

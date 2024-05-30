@@ -9,7 +9,7 @@
 #include"Ship.h"
 #include"TitleScene.h"
 #include"Enemy.h"
-
+#include"SDL_ttf.h"
 using namespace std;
 
 Game::Game()

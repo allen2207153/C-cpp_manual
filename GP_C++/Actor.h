@@ -31,7 +31,7 @@ public:
 	void SetRotation(float rotation) { mRotation = rotation; }
 	
 	State GetState() const { return mState; }
-	void SetState(State state) { mState = state; }
+	void SetState(const State state) { mState = state; }
 
 	class Game* GetGame() { return mGame; }
 
