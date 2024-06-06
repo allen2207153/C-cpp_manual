@@ -82,7 +82,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Solution\SDL2-2.30.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -105,7 +105,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Solution\SDL2-2.30.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -124,7 +124,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Solution\SDL2-2.30.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -147,7 +147,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Solution\SDL2-2.30.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -158,37 +158,30 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AnimSpriteComponent.h" />
     <ClInclude Include="BGSpriteComponent.h" />
-    <ClInclude Include="BombEffect.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EndScene.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="Missile.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Ship.h" />
     <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="text.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AnimSpriteComponent.cpp" />
     <ClCompile Include="BGspriteComponent.cpp" />
-    <ClCompile Include="BombEffect.cpp" />
-    <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EndScene.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
-    <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="text.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

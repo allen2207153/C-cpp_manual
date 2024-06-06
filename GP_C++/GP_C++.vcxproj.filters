@@ -36,9 +36,6 @@
     <ClInclude Include="BGSpriteComponent.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
@@ -51,16 +48,10 @@
     <ClInclude Include="EndScene.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="Missile.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="ColliderComponent.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="BombEffect.h">
+    <ClInclude Include="text.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,9 +77,6 @@
     <ClCompile Include="BGspriteComponent.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
-    <ClCompile Include="Ship.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
@@ -104,16 +92,7 @@
     <ClCompile Include="EndScene.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
-    <ClCompile Include="ColliderComponent.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
-    <ClCompile Include="Missile.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>資源檔</Filter>
-    </ClCompile>
-    <ClCompile Include="BombEffect.cpp">
+    <ClCompile Include="text.cpp">
       <Filter>資源檔</Filter>
     </ClCompile>
   </ItemGroup>

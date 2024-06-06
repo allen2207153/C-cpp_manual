@@ -32,6 +32,11 @@ bool Game::Initialize()
 		return false;
 	}
 
+	if (TTF_Init() == - 1)
+	{
+		SDL_Log("Failed to initialize SDL_ttf: %s", SDL_GetError());
+	}
+
 	mWindow = SDL_CreateWindow(
 		"Shooting game",
 		100,
@@ -228,6 +233,7 @@ void Game::Shutdown()
 	SDL_Quit();
 	UnloadData();
 	IMG_Quit();
+	TTF_Quit();
 }
 
 void Game::LoadData()
