@@ -54,6 +54,8 @@ private:
 	//Is game clear?
 	bool mGameClear;
 
+	const std::string AssetsPath = "Assets/"; // Mac + CLion
+
 	class Scene* mScene;//Current scene
 	class Scene* mNextScene;//Next scene
 
@@ -72,4 +74,5 @@ public:
 	bool GetGameClear() const { return mGameClear; }
 	void SetShip(class Ship* ship) { mShip = ship; }
 	Ship* GetShip() const { return mShip; }
+	std::string GetAssetsPath() const { return AssetsPath; }
 };

@@ -21,7 +21,7 @@ void GameScene::Start()
 	for (int i = 0; i < 10; i++)
 	{
 		auto* enemy = new Enemy(mGame);
-		enemy->SetPosition(Vector2(1100.0f, Math::GetRand(100.0f, mGame->ScreenHeight - 100)));
+		enemy->SetPosition(Vector2(1100.0f, Math::GetRand(100.0f, mGame->ScreenHeight - 300)));
 		enemy->SetEnemySpeed(Math::GetRand(200.0f, 300.f));
 		enemy->SetScale(Math::GetRand(2.0f, 2.5f));
 

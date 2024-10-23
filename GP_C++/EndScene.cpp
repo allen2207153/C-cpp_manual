@@ -25,8 +25,7 @@ void EndScene::Start()
 
 	
 	endMsgSprite->SetTexture(
-		mGame->GetTexture((mGame->GetGameClear() ? "Assets/msg_clear.png" : "Assets/msg_over.png"))
-	);
+		mGame->GetTexture(mGame->GetAssetsPath() + (mGame->GetGameClear() ? "msg_clear.png" : "msg_over.png")));
 
 }
 

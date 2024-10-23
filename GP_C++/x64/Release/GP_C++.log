@@ -1,0 +1,37 @@
+﻿  Actor.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  AnimSpriteComponent.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  BGspriteComponent.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  BombEffect.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  ColliderComponent.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  Component.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  EndScene.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  Enemy.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  Game.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  GameScene.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  main.cpp
+  Math.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  Missile.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  Scene.cpp
+  Ship.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  SpriteComponent.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  TitleScene.cpp
+C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\Math.h(52,14): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  正在產生程式碼
+  Previous IPDB not found, fall back to full compilation.
+  All 1050 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成程式碼產生
+  GP_C++.vcxproj -> C:\Users\allen\OneDrive\桌面\C++gameProgram\C-cpp_manual\GP_C++\x64\Release\GP_C++.exe
