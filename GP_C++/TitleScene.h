@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.h"
 
-// ‰Šú‰»ƒV[ƒ“ƒNƒ‰ƒX
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X
 class TitleScene : public Scene {
 public:
     TitleScene(class Game* game);
@@ -12,6 +12,6 @@ public:
     std::string const GetSceneName() override;
 
 private:
-    class Actor* mStartMsg; // ŠJnƒƒbƒZ[ƒW
+    class Actor* mStartMsg; // ï¿½Jï¿½nï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½W
 
 };

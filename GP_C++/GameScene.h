@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.h"
 
-// ƒQ[ƒ€ƒV[ƒ“ƒNƒ‰ƒX
+// ï¿½Qï¿½[ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X
 class GameScene : public Scene {
 public:
     GameScene(class Game* game);
